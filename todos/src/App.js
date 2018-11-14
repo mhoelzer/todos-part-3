@@ -3,17 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import todoList from './todos.json';
 
+// pascal case helps with distinguishing from html
+// no state b/c no way to change components with state,; this is just displaying and showing render method
 class TodoItem extends Component {
-  state = {
-    title: String,
-    completed: true
-  };
   render() {
+    // if dont do this, change this to match the stuff with todos and this.state
+    const { title, completed } = this.props;
     return (
-      <li className={this.props.completed && "completed"}>
+      // it will be completed
+      // <li className={completed && "completed"}> // this will make an error
+      // still want something to return even if empty
+      <li className={completed ? "completed" : ""}>
         <div className="view">
-          <input className="toggle" type="checkbox" checked={this.props.completed}/>
-          <label>{this.props.title}</label>
+          <input className="toggle" type="checkbox" defaultChecked={completed} />
+          {/* change checked to defaultChecked b/c that's not a react thingy */}
+          <label>{title}</label>
           <button className="destroy"></button>
         </div>
       </li>
@@ -26,10 +30,13 @@ class TodoList extends Component {
     todos: todoList
   };
   render() {
+    // if didnt do this, change todos.map to this.state.todos.map; do use state but not modifying it now
+    const { todos } = this.state;
     return (
       <section className="main">
         <ul className="todo-list">
-          {this.state.todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} />)}
+          {/* when put in comp state; when inside the map function, it will be a single todo */}
+          {todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} />)}
         </ul>
       </section>
     );
@@ -42,9 +49,10 @@ class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" autofocus />
+          <input className="new-todo" placeholder="What needs to be done?" autoFocus />
+          {/* the autoFocus auto sleects that input, so it makes it faster for the user; cAn do for loginbox */}
         </header>
-        <TodoList/>
+        <TodoList />
         <footer className="footer">
           <span className="todo-count"><strong>0</strong> item(s) left</span>
           <button className="clear-completed">Clear completed</button>
