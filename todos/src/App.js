@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import todoList from './todos.json';
+
+class Todo extends Component {
+  state = {
+    text: String,
+    checked: false
+  }
+  render() {
+    return (
+
+    )
+  }
+}
+
+class TodoList extends Component {
+  render() {
+    return (
+      
+    )
+  }
+}
 
 class App extends Component {
   render() {
