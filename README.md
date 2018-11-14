@@ -33,7 +33,7 @@ This repository comes with a couple of directories already:
 You'll need to create a react application in a new directory (as the above files will cause `create-react-app` to complain):
 
 ```console
-foo@bar:~/todos-part-1 $ create-react-app todos
+foo@bar:~/todos-part-1 $ npx create-react-app todos
 foo@bar:~/todos-part-1 $ cd todos
 ```
 
@@ -41,7 +41,7 @@ foo@bar:~/todos-part-1 $ cd todos
 Once there, make sure that the scaffold React application works:
 
 ```console
-foo@bar:~/todos-part-1 $ yarn start
+foo@bar:~/todos-part-1/todos $ npm start
 ```
 
 ## Acceptance Criteria
