@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import todoList from './todos.json';
-
+// test
 // pascal case helps with distinguishing from html
 // no state b/c no way to change components with state,; this is just displaying and showing render method
 class TodoItem extends Component {
