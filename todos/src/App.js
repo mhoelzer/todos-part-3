@@ -8,17 +8,17 @@ import todoList from './todos.json';
 class TodoItem extends Component {
   render() {
     // if dont do this, change this to match the stuff with todos and this.state
-    const { title, completed } = this.props;
+    const { title, completed, destroyOneTodo } = this.props;
     return (
       // it will be completed
       // <li className={completed && "completed"}> // this will make an error
       // still want something to return even if empty
       <li className={completed ? "completed" : ""}>
         <div className="view">
-          <input className="toggle" type="checkbox" defaultChecked={completed} />
+          <input className="toggle" type="checkbox" defaultChecked={completed} onClick={completed}/>
           {/* change checked to defaultChecked b/c that's not a react thingy */}
           <label>{title}</label>
-          <button className="destroy"></button>
+          <button className="destroy" onClick={destroyOneTodo}></button>
         </div>
       </li>
     );
@@ -26,24 +26,31 @@ class TodoItem extends Component {
 };
 
 class TodoList extends Component {
-  state = {
-    todos: todoList
-  };
   render() {
     // if didnt do this, change todos.map to this.state.todos.map; do use state but not modifying it now
-    const { todos } = this.state;
+    // const { todos } = this.state;
     return (
       <section className="main">
-        <ul className="todo-list">
-          {/* when put in comp state; when inside the map function, it will be a single todo */}
-          {todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} />)}
-        </ul>
+        <ul className="todo-list">{this.props.children}</ul>
       </section>
     );
   };
 };
 
 class App extends Component {
+  state = {todos: todoList}
+  // {todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} />)}
+  handleMarkCompletedTodo = idUserClicked => event => {
+    const { todos } = this.state;
+    const newTodos = todos.map(todo => {
+      if(todo.id === idUserClicked) {
+        todo.completed = true;
+      }
+      return todo;
+    });
+    this.setState({todos: newTodos});
+    // <TodoItem key={todo.id} title={todo.title} completed={todo.completed} />
+  }
   render() {
     return (
       <section className="todoapp">
