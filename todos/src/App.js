@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import todoList from './todos.json';
 
@@ -49,27 +48,26 @@ class TodoList extends Component {
   handleAddTodo = event => {
     const { todos } = this.state;
     let makeId = Math.floor(Math.random() * 333666999);
-    if (event.keyCode === 13) { // 13 is the code for enter; could also do event.key == "Enter"
+    if(event.keyCode === 13) { // 13 is the code for enter; could also do event.key == "Enter"
+      let newTodos = todos.slice(0); // copy curr arr and return new; can go back in time 
       let newlyEnteredTodo = {
         userId: 1,
         id: makeId,
         title: event.target.value,
         completed: false
       };
-      todos.push(newlyEnteredTodo);
-      this.setState({ todos: todos });
+      newTodos.push(newlyEnteredTodo);
+      this.setState({ todos: newTodos });
       event.target.value = "";
     };
   };
 
   handleDestroyOne = clickedTodoId => event => {
-    const newTodos = this.state.todos.map(todo => {
+    const newTodos = this.state.todos.filter(todo => {
       if (todo.id === clickedTodoId) {
-        todo.completed = !todo.completed;
-        // return false
+        return false
       }
-      return todo;
-      // return true;
+      return true;
     });
     this.setState({ todos: newTodos });
   };
@@ -93,13 +91,13 @@ class TodoList extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" autoFocus />
+          <input className="new-todo" placeholder="What needs to be done?" autoFocus onKeyDown={this.handleAddTodo} />
           {/* the autoFocus auto sleects that input, so it makes it faster for the user; cAn do for loginbox */}
         </header>
         <section className="main">
           <ul className="todo-list">
             {/* when put in comp state; when inside the map function, it will be a single todo */}
-            {todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} handleToggleCompletedTodo={this.handleToggleCompletedTodo(todo.id)} />)}
+            {todos.map(todo => <TodoItem key={todo.id} title={todo.title} completed={todo.completed} handleToggleCompletedTodo={this.handleToggleCompletedTodo(todo.id)} handleDestroyOne={this.handleDestroyOne(todo.id)}/>)}
             {/* call the hTCT and pass in the todoid and store inside clickedTodoId var, which causes cTI to be in scope for event function  --> completeTodo can also just be hTCT; it rerenders only 1 when props change */}
           </ul>
         </section>
