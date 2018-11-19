@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link, Route, Switch } from "react-router-dom";
+// import queryString from "query-string";
 import TodoItem from "./TodoItem.js";
 import todoList from '../todos.json';
 
@@ -18,7 +20,7 @@ class TodoList extends Component {
             }
             return todo; // have to return original todo obj
         });
-        // overwrite todos w/ newtodos 
+        // overwrite todos w/ newtodos
         this.setState({ todos: newTodos });
     };
 
@@ -79,12 +81,24 @@ class TodoList extends Component {
                     </ul>
                 </section>
                 <footer className="footer">
+                    {/* should be 0 default */}
                     <span className="todo-count"><strong>0</strong> item(s) left</span>
+                    <ul className="filters">
+                        <Switch>
+                            <Route path="/" /> 
+                            {/* component={Home}   component={Active} component={Completed} */}
+                            <Route path="/active"/>
+                            <Route path="/completed" />
+                        </Switch>
+                        <li><Link to="/">All</Link></li>
+                        <li><Link to="/active">Active</Link></li>
+                        <li><Link to="/completed">Completed</Link></li>
+                    </ul>
                     <button className="clear-completed" onClick={this.handleDeleteAllCompletedTodos}>Clear completed</button>
                 </footer>
             </section>
         );
     };
-};  
+};
 
 export default TodoList;
