@@ -18,7 +18,7 @@ class TodoList extends Component {
             }
             return todo; // have to return original todo obj
         });
-        // overwrite todos w/ newtodos
+        // overwrite todos w/ newtodos 
         this.setState({ todos: newTodos });
     };
 
