@@ -70,6 +70,7 @@ class App extends Component {
       handleDestroyAllCompletedTodos: this.handleDestroyAllCompletedTodos,
       completed: todos.filter(todo => !todo.completed).length
     };
+    console.log("eohjfs")
     return (
       <section className="todoapp">
         <Switch>
