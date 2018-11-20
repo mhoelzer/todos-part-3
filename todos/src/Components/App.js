@@ -75,7 +75,7 @@ class App extends Component {
         <Switch>
           <Route path="/active" render={props => <TodoList {...props} {...allHandlingProps} todos={todos.filter(todo => !todo.completed)} />} />
           <Route path="/completed" render={props => <TodoList {...props} {...allHandlingProps} todos={todos.filter(todo => todo.completed)} />} />
-          <Route path="/" render={props => <TodoList {...props} {...allHandlingProps} todos={todos} />} />
+          <Route render={props => <TodoList {...props} {...allHandlingProps} todos={todos} />} />
         </Switch>
       </section>
     );
