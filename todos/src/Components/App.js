@@ -70,12 +70,13 @@ class App extends Component {
       handleDestroyAllCompletedTodos: this.handleDestroyAllCompletedTodos,
       completed: todos.filter(todo => !todo.completed).length
     };
+    console.log("eohjfs")
     return (
       <section className="todoapp">
         <Switch>
           <Route path="/active" render={props => <TodoList {...props} {...allHandlingProps} todos={todos.filter(todo => !todo.completed)} />} />
           <Route path="/completed" render={props => <TodoList {...props} {...allHandlingProps} todos={todos.filter(todo => todo.completed)} />} />
-          <Route render={props => <TodoList {...props} {...allHandlingProps} todos={todos} />} />
+          <Route path="/" render={props => <TodoList {...props} {...allHandlingProps} todos={todos} />} />
         </Switch>
       </section>
     );
