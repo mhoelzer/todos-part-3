@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
 import './index.css';
 import App from './Components/App';
-import * as serviceWorker from './serviceWorker';
 
 const Index = () => (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
